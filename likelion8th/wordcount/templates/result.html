@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: darksalmon;
+            text-align: center;
+        }
+        h1{
+            font-family: fantasy;
+            font-size: 50px;
+            background-color: darkseagreen;
+            margin: auto;
+        }
+        h2{
+            font-family: inherit;
+            background-color: lightgoldenrodyellow;
+            margin: 10px 650px
+        }
+    </style>
+</head>
+<body>
+    
+    <h1>RESULT</h1>
+
+    <a href="{%url 'home' %}">home</a>
+    
+    <h2>Total number of entered characters: {{total}} </h2>
+    <br>
+    <h2>Entered sentence:</h2>
+    {{text}}
+    <br>
+    <br>
+    <h2>Word count:</h2>
+    {% for word,count in dictionary%}
+    
+    {{word}}:{{count}}
+    <br>
+    
+    {% endfor %}
+    
+</body>
+</html>
