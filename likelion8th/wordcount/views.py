@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
-def home(request):
-    return render(request,'home.html')
+def wordcount(request):
+    return render(request,'wordcount.html')
 
 def about(request):
     return render(request,'about.html')
