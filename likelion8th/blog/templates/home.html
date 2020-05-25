@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <title>Blog</title>
+    <style>
+      #blog-container {
+        width: 940px;
+        margin: 0px auto;
+        padding: 20px;
+        border: 1px solid #bcbcbc;
+      }
+      #blog-header {
+        padding: 20px;
+        margin-bottom: 20px;
+        border: 1px solid #bcbcbc;
+      }
+      #blog-content {
+        width: 580px;
+        padding: 20px;
+        margin-bottom: 20px;
+        float: left;
+        border: 1px solid #bcbcbc;
+      }
+      #blog-sidebar {
+        width: 260px;
+        padding: 20px;
+        margin-bottom: 20px;
+        float: right;
+        border: 1px solid #bcbcbc;
+      }
+      #blog-footer {
+        clear: both;
+        padding: 20px;
+        border: 1px solid #bcbcbc;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="blog-container">
+      <div style="width: 100%; text-align: center;" id="blog-header">
+        <h1>대탈출 리뷰 블로그!</h1>
+        {% load static %}
+        <img src="{% static '대탈출메인.png' %}" style="width: 100%; max-width: 760px; vertical-align: middle;" alt="">
+      </div>
+
+      <div id="blog-content">
+        <h2>Content</h2>
+        <a href="{%url 'new'%}">새글 작성하기</a>
+
+        {% for blog in blogs%}
+        <hr>
+        <a href="{%url 'detail' blog.id%}">
+        {{blog.title}}
+        <br>
+        {{blog.pub_data}}
+        <br>
+        {{blog.summary}}
+        </a>
+        {% if blog.image %}
+            <img src="{{ blog.image.url }}" >
+        {% endif %}
+        {% endfor %}
+      </div>
+      <div id="blog-sidebar">
+        <h2>Sidebar</h2>
+        <ul>
+          <li>대탈출 시즌1</li>
+          <li style="font-size: large;">대탈출 시즌2</li>
+          <li>대탈출 시즌3</li>
+        </ul>
+      </div>
+      <div id="blog-footer">
+        <p>Copyright</p>
+        <p>@sieun Kim.</p>
+      </div>
+    </div>
+  </body>
+</html>

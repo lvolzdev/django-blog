@@ -1,14 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <title>Detail page</title>
+        <style>
+            #blog-container {
+                width: 940px;
+                margin: 0px auto;
+                padding: 20px;
+                border: 1px solid #bcbcbc;
+            }
+            #blog-content {
+                margin-bottom: 20px;
+                padding: 20px;
+                border: 1px solid #bcbcbc;
+            }
+            #blog-header {
+                width: 580px;
+                margin-bottom: 20px;
+                padding: 20px;
+                border: 1px solid #bcbcbc;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="blog-contatiner">
+            <div style="width: 100%;" id="blog-header">
+                <h1>Detail page</h1>
+            </div>
+            
+            <div id="blog-content">
+                <h3>제목:{{blog.title}}</h3>
 
-<h1>Detail page</h1>
+                <hr>
 
-<h3>제목:{{blog.title}}</h3>
+                <p>{{blog.pub_data}}</p>
 
-<hr>
+                <p>{{blog.body}}</p>
 
-<p>{{blog.pub_data}}</p>
+                {% if blog.image %}
+                    <img src="{{ blog.image.url }}" >
+                {% endif %}
+                <br>
+                <br>
+                <a href="{%url 'edit' blog.id%}">수정하기</a>
+                <a href="{%url 'delete' blog.id%}">삭제하기</a> <!--'' 안은 path -->
+                <a href="{%url 'home'%}">홈으로</a>
+            </div>
+        </div>
+    </body>
+</html>
 
-<p>{{blog.body}}</p>
-
-<a href="{%url 'edit' blog.id%}">수정하기</a>
-<a href="{%url 'delete' blog.id%}">삭제하기</a> <!--'' 안은 path -->
-<a href="{%url 'list'%}">홈으로</a>

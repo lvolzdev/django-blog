@@ -1,13 +1,45 @@
-
-<h1>글 수정하기</h1>
-<form action="{%url 'update' blog.id %}" method="POST">
-    {%csrf_token%}
-    제목: <input type="text" value = {{blog.title}} name="title">
-    <br>
-    <br>
-    본문: <textarea name="body" id="" cols="30" rows="10">{{blog.body}}</textarea>
-    <br>
-    <button type="submit">작성</button>
-
-
-</form>
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <title>Edit page</title>
+        <style>
+            #blog-container {
+                width: 940px;
+                margin: 0px auto;
+                padding: 20px;
+                border: 1px solid #bcbcbc;
+            }
+            #blog-content {
+                margin-bottom: 20px;
+                padding: 20px;
+                border: 1px solid #bcbcbc;
+            }
+            #blog-header {
+                width: 580px;
+                margin-bottom: 20px;
+                padding: 20px;
+                border: 1px solid #bcbcbc;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="blog-contatiner">
+            <div style="width: 100%;" id="blog-header">
+                <h1>Edit page</h1>
+            </div>
+            
+            <div id="blog-content">
+                <form action="{%url 'update' blog.id %}" method="POST">
+                    {%csrf_token%}
+                    제목: <input type="text" value = {{blog.title}} name="title">
+                    <br>
+                    <br>
+                    본문: <textarea name="body" id="" cols="60" rows="20">{{blog.body}}</textarea>
+                    <br>
+                    <button type="submit">작성</button>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

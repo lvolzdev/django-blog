@@ -1,13 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <title>New page</title>
+        <style>
+            #blog-container {
+                width: 940px;
+                margin: 0px auto;
+                padding: 20px;
+                border: 1px solid #bcbcbc;
+            }
+            #blog-content {
+                margin-bottom: 20px;
+                padding: 20px;
+                border: 1px solid #bcbcbc;
+            }
+            #blog-header {
+                width: 580px;
+                margin-bottom: 20px;
+                padding: 20px;
+                border: 1px solid #bcbcbc;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="blog-contatiner">
+            <div style="width: 100%;" id="blog-header">
+                {% load static %} <!--static을 불러오자-->
+                <h1>New page</h1>
+                <img src="{% static '대탈추르포스터.jpg' %}" alt="">
+            </div>
+            
+            <div id="blog-content">
+                <form method="POST" enctype="multipart/form-data"> <!--post방식으로 입력값 받지-->
+                    {% csrf_token %}
+                    <table>
+                        {{form.as_table}} <!--as_table : 태그-->
+                    </table>
+                    <input class ="btn btn-dark" type="submit" value="저장">
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
 
-<h1>새 글 작성하기</h1>
-<form action="{%url 'create'%}" method="POST">
-    {%csrf_token%}
-    제목: <input type="text" name="title">
-    <br>
-    <br>
-    본문: <textarea name="body" id="" cols="30" rows="10"></textarea>
-    <br>
-    <button type="submit">작성</button>
-
-
-</form>

@@ -1,19 +1,33 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Blog
 from django.utils import timezone
-
+from .form import BlogForm
 # Create your views here.
 
-def list(request):
+def home(request):
     blogs = Blog.objects.all()
-    return render(request, 'list.html', {'blogs':blogs})
+    return render(request, 'home.html', {'blogs':blogs})
 
 def detail(request, blog_id):
     blog = get_object_or_404(Blog, pk = blog_id) #(클래스 이름, identitiy)
     return render(request, 'detail.html', {'blog':blog})
 
 def new(request):
-    return render(request, 'new.html')
+#1. 데이터가 입력된 후 제출 버튼을 누르고 데이터 저장 = post
+#2. 정보가 입력되지 않은 빈칸으로 되어있는 페이지 보여주기 = get
+    if request.method == 'POST':
+        form = BlogForm(request.POST, request.FILES) #입력값
+        if form.is_valid():
+            content = form.save(commit = False) #임시저장. 보류
+            content.pub_data = timezone.now()
+            content.save() #이제 값들 다 채워졌으니 저장해줌
+            return redirect('home') #메인페이지 돌아가기
+
+    else:
+        form = BlogForm() #form변수에 빈 BlogForm객체를 담아주자
+        return render(request, 'new.html', {'form':form})
+
+
 
 def create(request):
     new_blog = Blog() #새로운 객체를 만들어
@@ -38,7 +52,7 @@ def update(request, blog_id): # new 함수와 똑같. 차이점은 아이디 필
 def delete(request, blog_id):
     delete_blog = get_object_or_404(Blog, pk = blog_id)
     delete_blog.delete()
-    return redirect('list')
+    return redirect('home')
 
 
 
