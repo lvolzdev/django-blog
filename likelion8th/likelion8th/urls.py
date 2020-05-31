@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 import wordcount.urls
 import blog.urls
+import account.urls
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -25,4 +26,5 @@ urlpatterns = [
     path('', blog.views.home, name = "home"),
     path('blog/', include(blog.urls)),
     path('wordcount/', include(wordcount.urls)),
+    path('account/', include(account.urls)),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

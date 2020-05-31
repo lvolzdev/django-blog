@@ -48,6 +48,17 @@
         <h2>Content</h2>
         <a href="{%url 'new'%}">새글 작성하기</a>
 
+
+        <div>
+          {% if user.is_authenticated %} 
+            <h3>안녕하세요 {{user.username}}님</h3>
+          {% endif %}
+          <a href="{% url 'login'%}">로그인</a>
+          <a href="{% url 'logout'%}">로그아웃</a>
+          <a href="{% url 'register'%}">회원가입</a>
+        </div>
+
+
         {% for blog in blogs%}
         <hr>
         <a href="{%url 'detail' blog.id%}">
