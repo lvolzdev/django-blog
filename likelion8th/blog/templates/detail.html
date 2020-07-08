@@ -38,6 +38,12 @@
 
                 <p>{{blog.body}}</p>
 
+                <p>[{{likes}}개의 좋아요를 받았습니다.]</p>
+                <form action="/blog/like/{{blog.id}}" method="GET">
+                    <button type="submit">좋아요</button>
+                </form>
+                <br>
+
                 {% if blog.image %}
                     <img src="{{ blog.image.url }}" >
                 {% endif %}
@@ -46,6 +52,26 @@
                 <a href="{%url 'edit' blog.id%}">수정하기</a>
                 <a href="{%url 'delete' blog.id%}">삭제하기</a> <!--'' 안은 path -->
                 <a href="{%url 'home'%}">홈으로</a>
+                <br>
+                <br>
+                <hr>
+                [댓글란]
+                <hr>
+                {% for comment in comments %}
+                작성자: {{comment.author}}
+                <br>내용: {{comment.body}}
+                <br>{{comment.pub_data}}
+                <hr>
+
+                {% endfor %}
+
+                <form action="/blog/commenting/{{blog.id}}" method="POST">
+                    {%csrf_token%}
+                    <input type="text" name='body'>
+                    <button type="submit">작성</button>
+                </form>
+
+
             </div>
         </div>
     </body>
